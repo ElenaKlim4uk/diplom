@@ -1,6 +1,7 @@
 import React, { useEffect, FC, useState } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useGetWeatherByQueryQuery } from "./weatherAPI";
+import { fetchWeather } from "./weatherAPI";
 import { Fact, Geo } from "./type";
 import Box from "@mui/material/Box";
 import Snackbar from "@mui/material/Snackbar";
@@ -14,6 +15,7 @@ import {
   Circle,
 } from "react-yandex-maps";
 import { Input } from "@mui/material";
+import { useQuery } from '../../app/hooks';
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
@@ -27,19 +29,24 @@ interface Props {
 }
 
 export const Weather: FC<Props> = (props) => {
-  // const query = useQuery()
-  // const lat = query.get("lat");
-  // const lon = query.get("lon");
+    const query = useQuery()
+   const qlat = query.get("lat")??'53.9';
+   const qlon = query.get("lon")??'27.56667';
+  
   const [geo, setGeo] = useState<Geo>();
   const [factState, setFact] = useState<Fact>();
   const [open, setOpen] = React.useState(false);
-  const [lat, setLat] = useState('11.632062');
-  const [lon, setLon] = useState('51.104087');
+  const [lat, setLat] = useState(qlat);
+  const [lon, setLon] = useState(qlon);
   const { data, error, isError, isLoading, isSuccess } =
     useGetWeatherByQueryQuery({
       lat: Number(lat),
       lon: Number(lon),
   });
+  const weatherData = fetchWeather({
+    lat: Number(lat),
+    lon: Number(lon),
+});
 
   useEffect(() => {
     if (isSuccess && data) {
@@ -76,6 +83,7 @@ export const Weather: FC<Props> = (props) => {
 
   return (
     <div>
+      
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
           {error && ((error as FetchBaseQueryError)?.data as string)}

@@ -2,29 +2,31 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Weather } from './features/weather/Weather';
-import { cardMediaClasses } from '@mui/material';
+import  Places  from './features/weather/Places';
+import  Signin  from './features/weather/Signin';
 
-class App extends React.Component {
-  componentDidMount(){
-    window.gapi.load('auth2', function() {
-     window.gapi.auth2.init({
-       client_id:process.env.REACT_APP_GOOGLE_CLIENT_ID
-     })
-    })
-  }
-  render(){
-    return (
-      <div className="App">
-        <Router>
-          <Switch>
-            <Route path="/">
-              <Weather />
-            </Route>
-          </Switch>
-        </Router>
-      </div>
-    )
-  }
+function App() {
+  
+  return (
+    <div className="App">
+      <Router>
+        <Switch>
+          <Route path="/" exact>
+            <Places/>
+            <Weather />
+          <Route path="{`/login`}" exact>
+            <Signin />
+          </Route>
+          </Route>
+            <Route path="{`/:city`}" exact>
+            <Places />
+            <Weather />
+          </Route>
+          
+        </Switch>
+      </Router>
+    </div>
+  );
 }
 
 export default App;
