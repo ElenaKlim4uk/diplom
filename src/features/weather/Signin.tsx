@@ -3,6 +3,9 @@ import { gapi } from 'gapi-script'
 
 
 class Signin extends Component {
+  
+  state = { isSignedIn: null };
+  
   componentDidMount() {
   
     
@@ -10,7 +13,8 @@ class Signin extends Component {
       gapi.auth2
         .init({ // не забудьте указать ваш ключ в .env
           client_id:
-            process.env.REACT_APP_GOOGLE_CLIENT_ID,
+          '878304371234-s72htcbesv9c3ccb6q8rkcq8plqpbol2.apps.googleusercontent.com',
+            
         })
         .then( console.log('init OK'),  console.log('error'))
     })
@@ -18,6 +22,8 @@ class Signin extends Component {
 
   signIn = () => {
     const auth2 = gapi.auth2.getAuthInstance()
+    
+    // console.log(auth2)
     auth2.signIn().then((googleUser:any) => {
     
       // метод возвращает объект пользователя
@@ -33,8 +39,16 @@ class Signin extends Component {
       // токен
       const id_token = googleUser.getAuthResponse().id_token
       console.log('ID Token: ' + id_token)
+      this.handleAuthChange();
+      auth2.isSignedIn.listen(this.handleAuthChange);
+      window.location.href = '/'
     })
   }
+  handleAuthChange = () => {
+    const auth2 = gapi.auth2.getAuthInstance()
+    this.setState({ isSignedIn: auth2.isSignedIn.get() });
+    console.log(this.state.isSignedIn)
+  };
   signOut = () => {
     const auth2 = gapi.auth2.getAuthInstance()
     auth2.signOut().then(function() {
