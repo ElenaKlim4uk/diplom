@@ -6,13 +6,21 @@ import  Places  from './features/weather/Places';
 import  Signin  from './features/weather/Signin';
 import { Redirect } from 'react-router'
 
-function App() {
+class App extends React.Component {
+  
+  state = { isSignedIn: null };
   //useState
   // const isSignedIn = useState()
-  //const [isSignedIn] = useState(0);
-  console.log(isSignedIn)
+  // const [isSignedIn, setIsSignedIn] = useState(0);
+  // console.log(isSignedIn)
+
+  handleSignedIn = (signinValue) => {
+    this.setState({isSignedIn: signinValue})
+  }
+
+  render() {
   return (
-    <div className="App">
+    <div className="App" onSetIsSignedIn={this.handleSignedIn}>
       <Router>
         <Switch>
           
@@ -35,6 +43,7 @@ function App() {
       </Router>
     </div>
   );
+}
 }
 
 export default App;

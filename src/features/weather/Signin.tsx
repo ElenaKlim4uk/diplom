@@ -46,7 +46,8 @@ class Signin extends Component {
   }
   handleAuthChange = () => {
     const auth2 = gapi.auth2.getAuthInstance()
-    this.setState({ isSignedIn: auth2.isSignedIn.get() });
+     this.setState({ isSignedIn: auth2.isSignedIn.get() });
+    this.props.onSetIsSignedIn(this.state.isSignedIn);
     console.log(this.state.isSignedIn)
   };
   signOut = () => {
