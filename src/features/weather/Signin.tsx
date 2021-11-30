@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { gapi } from 'gapi-script'
 
-
-class Signin extends Component {
+class Signin extends Component<{ onSignedIn: any }, { }> {
   
-  state = { isSignedIn: null };
+  state = { isSignedIn: false };
   
   componentDidMount() {
   
@@ -41,13 +40,12 @@ class Signin extends Component {
       console.log('ID Token: ' + id_token)
       this.handleAuthChange();
       auth2.isSignedIn.listen(this.handleAuthChange);
-      window.location.href = '/'
     })
   }
   handleAuthChange = () => {
     const auth2 = gapi.auth2.getAuthInstance()
-     this.setState({ isSignedIn: auth2.isSignedIn.get() });
-    this.props.onSetIsSignedIn(this.state.isSignedIn);
+    this.setState({ isSignedIn: auth2.isSignedIn.get() });
+    this.props.onSignedIn(this.state.isSignedIn)
     console.log(this.state.isSignedIn)
   };
   signOut = () => {

@@ -8,15 +8,15 @@ const LONS = [' -0.1257400', '37.6155600', '30.5238000'];
 class Places extends React.Component {
     render() {
       return (
-        <div className="App">
-            {PLACES.map((place, index) => (
-            <a
+          <ul>
+          {PLACES.map((place, index) => (
+            <li><a key={index}
                 href={'/'+place+'?lat='+LATS[index]+'&lon='+LONS[index]}
             >
                 {place} 
-            </a>
+            </a></li>
             ))}
-         </div>
+          </ul>
       );
     }
   }
