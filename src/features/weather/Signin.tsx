@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { gapi } from 'gapi-script'
+import'./Signin.style.css'
 
 class Signin extends Component<{ onSignedIn: any }, { }> {
   

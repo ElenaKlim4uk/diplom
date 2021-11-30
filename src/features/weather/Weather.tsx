@@ -16,6 +16,7 @@ import {
 } from "react-yandex-maps";
 import { Input } from "@mui/material";
 import { useQuery } from '../../app/hooks';
+import './Weather.style.css'
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
@@ -82,7 +83,7 @@ export const Weather: FC<Props> = (props) => {
     };
 
   return (
-    <div>
+    <div className='Weather-container'>
       
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
@@ -97,7 +98,7 @@ export const Weather: FC<Props> = (props) => {
           <p>Province: {geo?.province?.name}</p>
           <p>Temp: {factState?.temp}</p>
           <p>
-            <img
+            <img className='weather-icon'
               src={`https://yastatic.net/weather/i/icons/funky/dark/${factState?.icon}.svg`}
               alt="weather icon"
             ></img>

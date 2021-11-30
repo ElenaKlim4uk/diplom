@@ -1,0 +1,12 @@
+.Weather-container{
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.Weather-container p{
+    font-size: 30px;
+    font-weight: 100;
+}
+
+.weather-icon{
+    min-height: 45px;
+}

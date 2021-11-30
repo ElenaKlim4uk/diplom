@@ -1,4 +1,5 @@
 import React from "react";
+import './Places.style.css'
 
 
  const PLACES = ["London", "Moscow", "Kiev"];
@@ -8,7 +9,7 @@ const LONS = [' -0.1257400', '37.6155600', '30.5238000'];
 class Places extends React.Component {
     render() {
       return (
-          <ul>
+          <ul className="places">
           {PLACES.map((place, index) => (
             <li><a key={index}
                 href={'/'+place+'?lat='+LATS[index]+'&lon='+LONS[index]}

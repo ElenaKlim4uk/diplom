@@ -1,0 +1,16 @@
+.places{
+    display: flex;
+    list-style-type: none;
+    justify-content: space-evenly;
+    background: rgba(0,0,0,0.2);
+}
+
+.places a:hover{
+    color: rgb(197, 225, 236);
+}
+.places a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 700;
+}
