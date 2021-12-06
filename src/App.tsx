@@ -5,7 +5,6 @@ import { Weather } from './features/weather/Weather';
 import  Places  from './features/weather/Places';
 import  Signin  from './features/weather/Signin';
 import { Redirect } from 'react-router';
-import { useAppSelector } from './app/hooks';
 
 class App extends Component<{}, { isSignedIn: boolean }> {
 
@@ -25,15 +24,13 @@ class App extends Component<{}, { isSignedIn: boolean }> {
   
 
   render() {
-    console.log(this.state.isSignedIn)
-
     return (
         <div className="App">
           <Router>
             <Switch>
 
               <Route path="/login" exact>
-                {this.state.isSignedIn ? <Redirect to="/"/> : <Signin onSignedIn={this.handleSignedIn.bind(this)}/>}
+                {localStorage.getItem('loggedIn')=='true' ? <Redirect to="/"/> : <Signin onSignedIn={this.handleSignedIn.bind(this)}/>}
                 {/*<Signin />*/}
               </Route>
 
@@ -43,7 +40,7 @@ class App extends Component<{}, { isSignedIn: boolean }> {
               </Route>
 
               <Route path="/">
-                {!this.state.isSignedIn ? <Redirect to="/login" />:<Places/>}
+                {localStorage.getItem('loggedIn')!='true' ? <Redirect to="/login" />:<Places/>}
                 <Weather/>
               </Route>
               

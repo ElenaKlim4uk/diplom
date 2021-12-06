@@ -2,7 +2,7 @@
     background: rgba(255, 255, 255, 0.4);
 }
 
-.Weather-container p{
+.weather-info{
     font-size: 30px;
     font-weight: 100;
 }

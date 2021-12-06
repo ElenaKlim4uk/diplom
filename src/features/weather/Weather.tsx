@@ -16,7 +16,8 @@ import {
 } from "react-yandex-maps";
 import { Input } from "@mui/material";
 import { useQuery } from '../../app/hooks';
-import './Weather.style.css'
+import './Weather.style.css';
+
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
   props,
@@ -94,9 +95,9 @@ export const Weather: FC<Props> = (props) => {
         <CircularProgress></CircularProgress>
       ) : (
         <Box sx={{ display: "flex", flexDirection: "column" }}>
-          <p>Country: {geo?.country?.name}</p>
-          <p>Province: {geo?.province?.name}</p>
-          <p>Temp: {factState?.temp}</p>
+          <p className='weather-info'>Country: {geo?.country?.name}</p>
+          <p className='weather-info'>Province: {geo?.province?.name}</p>
+          <p className='weather-info'>Temp: {factState?.temp}</p>
           <p>
             <img className='weather-icon'
               src={`https://yastatic.net/weather/i/icons/funky/dark/${factState?.icon}.svg`}

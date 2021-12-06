@@ -3,14 +3,26 @@
     list-style-type: none;
     justify-content: space-evenly;
     background: rgba(0,0,0,0.2);
+    padding: 8px 0;
 }
 
-.places a:hover{
+.place:hover{
     color: rgb(197, 225, 236);
 }
-.places a {
+.place{
   color: #fff;
   text-decoration: none;
   font-size: 20px;
   font-weight: 700;
+}
+
+.logout{
+  color: rgb(204, 78, 78);
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.logout:hover{
+  color: #000;
 }

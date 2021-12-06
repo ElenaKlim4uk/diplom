@@ -47,11 +47,13 @@ class Signin extends Component<{ onSignedIn: any }, { }> {
     const auth2 = gapi.auth2.getAuthInstance()
     this.setState({ isSignedIn: auth2.isSignedIn.get() });
     this.props.onSignedIn(this.state.isSignedIn)
-    console.log(this.state.isSignedIn)
+    localStorage.setItem('loggedIn', 'true');
+    window.location.href='/';
   };
   signOut = () => {
     const auth2 = gapi.auth2.getAuthInstance()
     auth2.signOut().then(function() {
+      localStorage.removeItem('loggedIn');
       console.log('User signed out.')
     })
   }
@@ -59,8 +61,7 @@ class Signin extends Component<{ onSignedIn: any }, { }> {
     return (
       <div className="App">
         <header className="App-header">
-          <button onClick={this.signIn}>Log in</button>
-          <button onClick={this.signOut}>Log out</button>
+          {localStorage.getItem('loggedIn')!='true'? <button className="Login-btn" onClick={this.signIn}>Log in</button>: <button className="Login-btn" onClick={this.signOut}>Log out</button>}
         </header>
       </div>
     )
